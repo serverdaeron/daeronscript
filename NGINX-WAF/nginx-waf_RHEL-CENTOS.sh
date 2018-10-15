@@ -63,7 +63,7 @@ do
 		echo "Include rules/*.conf" >> /etc/nginx/modsecurity.conf
 		echo "#Disable rule by ID from error message" >> /etc/nginx/modsecurity.conf
 		echo "#SecRuleRemoveById 920350" >> /etc/nginx/modsecurity.conf
-		echo "load_module modules/ngx_http_modsecurity_module.so;" >> /etc/nginx/nginx.conf		
+		sed -e "/nginx.pid;/a\\load_module modules/ngx_http_modsecurity_module.so;" /etc/nginx/nginx.conf
 		systemctl restart nginx
 		echo "[*] Finished!!"
 		echo "[*] Remember to set-up Mod-security roules in nginx conf (based on your host)"
@@ -84,3 +84,6 @@ do
 	*) echo "invalid option $REPLY";;
     esac
 done
+
+#SED TAB
+# sed -e "//var/run/nginx.pid;/a\\\tload_module modules/ngx_http_modsecurity_module.so;" /etc/nginx/nginx.conf
