@@ -62,7 +62,7 @@ while  [[ $pass_admin != $pass_admin2 ]]
 	do
 		echo -e "[*] ${GREEN}Insert password for Admin user  ${NC}[It will be stored encrypted]:"
 		read -p "Insert PWD: " pass_admin
-		echo -e "[*] ${GREEN}Reinsert the password:"
+		echo -e "[*] ${GREEN}Reinsert the password:${NC}"
 		read -p "Confirm PWD: " pass_admin2
 	done
 # encrypt password remove  - at the end of sha256sum output. the has is stored in the $pass var
@@ -82,8 +82,8 @@ pass_secret=$(pwgen -N 1 -s 96)
 sudo sed -i "s/password_secret =/password_secret = $pass_secret/g" /etc/graylog/server/server.conf
 # set some Java options (heap size and ipv4 as preferred stack)
 sudo sed -i 's|GRAYLOG_SERVER_JAVA_OPTS="-Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow"|GRAYLOG_SERVER_JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Xms4g -Xmx4g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow"|g' /etc/sysconfig/graylog-server
-clean
+clear
 sudo systemctl enable graylog-server
 sudo systemctl restart graylog-server
-clean
+clear
 echo -e "[*] ${GREEN}Finished!!${NC}"
