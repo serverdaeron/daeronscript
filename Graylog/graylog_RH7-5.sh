@@ -4,7 +4,6 @@
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 pass_admin='graylog'
-pass_admin2=''
 echo -e "[*] ${GREEN}Type the IP address of this server ${NC}[and press ENTER]:"
 read -p "IP Address: " ip_addr
 #Update Centos and Setup FirewallD
@@ -31,7 +30,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc" >> /etc/yum.repos.d/mo
 sleep 1
 sudo yum update -y
 sleep 1
-sudo yum -y install mongodb-org && systemctl enable mongod && systemctl start mongod
+sudo yum -y install mongodb-org && sudo systemctl enable mongod && sudo systemctl start mongod
 echo -e "[*] ${GREEN}Add Elasticsearch repository ${NC}and install it"
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 sudo echo "[elasticsearch-5.x]
