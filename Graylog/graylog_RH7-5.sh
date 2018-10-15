@@ -3,8 +3,10 @@
 # Originally posted on https://github.com/5kuby/Graylog/blob/master
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
+pass_admin='graylog'
+pass_admin2=''
 echo -e "[*] ${GREEN}Type the IP address of this server ${NC}[and press ENTER]:"
-read ip_addr
+read -p "IP Address: " ip_addr
 #Update Centos and Setup FirewallD
 echo -e "[*] ${GREEN}Update RHEL and set up Firewall${NC}"
 yum update -y
@@ -54,10 +56,18 @@ echo -e "[*] ${GREEN}Install GrayLog repository and server${NC}"
 sleep 1
 rpm -Uvh https://packages.graylog2.org/repo/packages/graylog-2.4-repository_latest.rpm
 yum -y install graylog-server
-echo -e "[*] ${GREEN}Insert password for Admin user ${NC}[It will be stored encrypted]"
-read pass_admin
+##################################
+###Add password control###########
+##################################
+while  [[ $pass_admin != $pass_admin2 ]]
+do
+echo -e "[*] ${GREEN}Insert password for Admin user  ${NC}[It will be stored encrypted]:"
+read -p "Insert PWD: " pass_admin
+echo -e "[*] ${GREEN}Reinsert the password:"
+read -p "Confirm PWD: " pass_admin2
+done
 # encrypt password remove  - at the end of sha256sum output. the has is stored in the $pass var
-pass=$( echo -n DHLSecurity! | sha256sum | sed 's/-//g')
+pass=$( echo -n $pass_admin | sha256sum | sed 's/-//g')
 # inserisco la variabile pass e imposto la password di admin con il valore immesso $pass_admin. Le " in sed elaborano le variabili
 sed -i "s/root_password_sha2 =/root_password_sha2 = $pass/g" /etc/graylog/server/server.conf
 # do some graylog configuration:
@@ -78,4 +88,3 @@ systemctl enable graylog-server
 systemctl restart graylog-server
 clean
 echo -e "[*] ${GREEN}Finished!!${NC}"
-
