@@ -60,12 +60,12 @@ yum -y install graylog-server
 ###Add password control###########
 ##################################
 while  [[ $pass_admin != $pass_admin2 ]]
-do
-echo -e "[*] ${GREEN}Insert password for Admin user  ${NC}[It will be stored encrypted]:"
-read -p "Insert PWD: " pass_admin
-echo -e "[*] ${GREEN}Reinsert the password:"
-read -p "Confirm PWD: " pass_admin2
-done
+	do
+		echo -e "[*] ${GREEN}Insert password for Admin user  ${NC}[It will be stored encrypted]:"
+		read -p "Insert PWD: " pass_admin
+		echo -e "[*] ${GREEN}Reinsert the password:"
+		read -p "Confirm PWD: " pass_admin2
+	done
 # encrypt password remove  - at the end of sha256sum output. the has is stored in the $pass var
 pass=$( echo -n $pass_admin | sha256sum | sed 's/-//g')
 # inserisco la variabile pass e imposto la password di admin con il valore immesso $pass_admin. Le " in sed elaborano le variabili
