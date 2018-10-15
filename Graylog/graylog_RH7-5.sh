@@ -46,7 +46,7 @@ sudo yum update -y
 sleep 1
 sudo yum -y install elasticsearch
 # set graylog as name of elastic cluster
-sudo sed -i 's/#cluster.name: my-application/cluster.name: DHL-GrayLOG/g' /etc/elasticsearch/elasticsearch.yml
+sudo sed -i 's/#cluster.name: my-application/cluster.name: GrayLOG/g' /etc/elasticsearch/elasticsearch.yml
 sudo chkconfig --add elasticsearch
 sudo systemctl daemon-reload
 sudo systemctl enable elasticsearch.service
