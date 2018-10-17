@@ -1,4 +1,5 @@
 #! /bin/bash
+##########################################################
 echo "Insert your Virtual Host name [subdomain.doma.in]"
 read -p "vhost: " site
 echo "Insert internal IP"
