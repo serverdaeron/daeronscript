@@ -13,8 +13,8 @@ select opt in "${options[@]}"
 do
     case $opt in
         "Yes")
-PS3='What kind of certificate do you want? [your own or Let\'sencrypt?]: '
-options=("MyOwn" "Let'sEncrypt" "Quit")
+PS3='What kind of certificate do you want? [your own or Lets Encrypt?]: '
+options=("MyOwn" "LetsEncrypt" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -32,12 +32,12 @@ do
             ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5; " >> /etc/nginx/conf-site/$site/ssl-$site.conf
                 break
                 ;;
-        "Let'sEncrypt")
+        "LetsEncrypt")
             yum -y install yum-utils
             yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
             yum -y install python2-certbot-nginx
             certbot --nginx certonly -d $site
-		break
+		        break
                 ;;
             PS3='Do you want to set up certbot autorenew?'
             options=("Yes" "No")
@@ -97,7 +97,7 @@ server  {
      include /etc/nginx/conf-site/$site/ssl-$site.conf;
      include /etc/nginx/conf-site/$site/services-$site.conf;
      
-     #auth_basic                            "Username and Password Required";
+     #auth_basic                            \"Username and Password Required\";
      #auth_basic_user_file                  /etc/nginx/.htpasswd;
 
      ModSecurityEnabled on;
