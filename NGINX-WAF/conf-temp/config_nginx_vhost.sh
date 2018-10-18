@@ -37,6 +37,8 @@ do
             yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
             yum -y install python2-certbot-nginx
             certbot --nginx certonly -d $site
+		break
+                ;;
             PS3='Do you want to set up certbot autorenew?'
             options=("Yes" "No")
             select opt in "${options[@]}"
@@ -118,7 +120,6 @@ echo "location / {
 proxy_set_header X-Forwarded-Proto https;
 proxy_pass https://$ip:$port;
 include /etc/nginx/conf-site/$site/proxy-$site.conf;
- }
-" >> /etc/nginx/conf-site/$site/service-$site.conf
+ }" >> /etc/nginx/conf-site/$site/service-$site.conf
 nginx -t
 nginx -s reload
