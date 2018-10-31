@@ -61,6 +61,11 @@ do
 		echo "Include crs-setup.conf" >> /etc/nginx/modsecurity.conf
 		echo "#Load all other Rules" >> /etc/nginx/modsecurity.conf
 		echo "Include rules/*.conf" >> /etc/nginx/modsecurity.conf
+		sed -i "s/SecRuleEngine DetectionOnly/SecRuleEngine On/" /etc/nginx/modsecurity.conf
+		sed -i "s/SecAuditLogType Serial/SecAuditLogType Concurrent/" /etc/nginx/modsecurity.conf
+		sed -i "s|SecAuditLog /var/log/modsec_audit.log|SecAuditLog /var/log/nginx/modsec_audit.log|" /etc/nginx/modsecurity.conf
+		chown nginx.root /var/log/modsec/nginx
+		chown nginx.root /var/log/nginx
 		echo "#Disable rule by ID from error message" >> /etc/nginx/modsecurity.conf
 		echo "#SecRuleRemoveById 920350" >> /etc/nginx/modsecurity.conf
 		sed -e "/nginx.pid;/a\\load_module modules/ngx_http_modsecurity_module.so;" /etc/nginx/nginx.conf
