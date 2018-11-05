@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "  Script for NGINX + MOD_SECURITY  "
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 PS3='Please enter your choice: '
 options=("RHEL" "CENTOS" "Quit")
 select opt in "${options[@]}"
@@ -37,7 +40,10 @@ do
     esac
 done
 sleep 5
-PS3='Do you want to install Mod_Security?: '
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "   Do you want to install Mod_Security?:   "
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+PS3='Please enter your choice: '
 options=("yes" "no" "quit")
 select opt in "${options[@]}"
 do
