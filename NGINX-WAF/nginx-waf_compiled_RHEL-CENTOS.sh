@@ -23,7 +23,8 @@ cd nginx-*
 make
 make install
 sed -i "s/#user  nobody;/user nginx nginx;/" /usr/local/nginx/conf/nginx.conf
-sed -e "/#pid logs/nginx.pid/a\\pid  /var/run/nginx.pid;"  /usr/local/nginx/conf/nginx.conf
+sed -i "/#pid logs/nginx.pid/a\\pid  /var/run/nginx.pid;"  /usr/local/nginx/conf/nginx.conf
+
 echo "include modsecurity.conf
 include owasp-modsecurity-crs/crs-setup.conf
 include owasp-modsecurity-crs/rules/*.conf" >> /usr/local/nginx/conf/modsec_includes.conf
@@ -54,4 +55,4 @@ PrivateTmp=true
 [Install]
 WantedBy=multi-user.target" >> /lib/systemd/system/nginx.service
 systemctl daemon-reload
-systemctl start nginx.service
+systemctl start nginx
