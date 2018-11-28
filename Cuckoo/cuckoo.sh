@@ -36,9 +36,11 @@ path = pwd
 mv MSEdge\ \-\ Win10.ova MSEdge-Win10.ova
 sudo vboxmanage import MSEdge-Win10.ova
 sudo vboxmanage hostonlyif create
+sudo ip link set vboxnet0 up
+sudo ip addr add 192.168.56.1/24 dev vboxnet0
 sudo vboxmanage hostonlyif ipconfig vboxnet0 -ip 192.168.56.1
 ##Change the network adapter on VirtualBox to host only and vboxnet0
-sudo iptables -A FORWARD -o enp0s3 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
+sudo iptables -A FORWARD -o ens18 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
 sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo echo 1 > /proc/sys/net/ipv4/ip_forward

@@ -106,3 +106,5 @@ break
 	*) echo "invalid option $REPLY";;
     esac      
 done
+
+\b(client)\s+\K[[:alnum:]]+\.[[:alnum:]]+\.[[:alnum:]]+\.[[:alnum:]]+
