@@ -13,6 +13,8 @@ yum update -y
 systemctl start firewalld
 firewall-cmd --zone=public --add-port=9000/tcp --permanent
 firewall-cmd --zone=public --add-port=22/tcp --permanent
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --zone=public --add-service=https --permanent
 systemctl restart firewalld
 sleep 1
 echo -e "[*] ${GREEN}RPM FUSION installation${NC}"
